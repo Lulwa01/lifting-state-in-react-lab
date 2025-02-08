@@ -25,35 +25,26 @@ const App = () => {
 
   const [stack, setStack] = useState([])
 
-  const addToBurget = (burger) => {
-    const newStack = [...stack, burger]
+  const addToBurger = (ingredient) => {
+    const newStack = [...stack, ingredient]
+    setStack(newStack)
+  }
+  console.log(stack)
+
+  const removeFromBurger = (ingredient) => {
+    const newStack = stack.filter(el => el !== ingredient)
     setStack(newStack)
   }
 
-  function removeFromBurger (burger) {
-    const removeBurger = availableIngredients.filter(availableIngredient => (
-      availableIngredient.name !== burger.name
-    ))
-    setStack(removeBurger)
-  }
-
   return (
-    <>
-    <BurgerStack stack={stack} />
-    <IngredientList 
-    Ingredients={addToBurget}
-    removeFromBurger={removeFromBurger}
-    />
     <main>
       <h1>Burger Stacker</h1>
       <section>
-      {/* List & Stack components */}
+        <IngredientList ingredients={availableIngredients} addToBurger={addToBurger} />
+        <BurgerStack stack={stack} removeFromBurger={removeFromBurger} />
       </section>
     </main>
-    </>
   );
 };
 
 export default App;
-
-// App: The parent component containing <BurgerStack> and <IngredientList>. It will also contain stack state, and two functions for manipulating that state.
